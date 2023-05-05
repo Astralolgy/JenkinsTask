@@ -15,8 +15,8 @@ pipeline{
         }
         stage('Unit and Integration Tests'){
             steps{
-                echo "Unit tests..."
-                echo "Integration tests..."
+                echo "Completing Unit tests..."
+                echo "Completing Integration tests..."
             }
             post{
                 success{
@@ -28,12 +28,13 @@ pipeline{
         }
         stage('Code Analysis'){
             steps{
-                echo "Check the quality of the code, ensuring it's up to standards with codescan..."
+                echo "Checking code quality, ensuring it's up to industry standard..."
             }
         }
         stage('Security Scan'){
             steps{
-                echo "Checking security of code using codescan..."
+                echo "Checking security of code"
+                echo "Ensuring no harmful code is here..."
             }
             post{
                 success{
