@@ -46,6 +46,7 @@ pipeline{
         stage('Deploy to Staging'){
             steps{
                 echo "Deploying to staging server..."
+                sleep 5
             }
         }
         stage('Integration Tests on Staging'){
@@ -63,6 +64,7 @@ pipeline{
         stage('Deploy to Production'){
             steps{
                 echo "Successfully deployed to $PRODUCTION_ENVIRONMENT"
+                sleep 10
             }
         }
     }
