@@ -1,0 +1,69 @@
+pipeline{
+    agent any
+    environment {
+        PRODUCTION_ENVIRONMENT = "Kira"
+        TESTING_ENVIRONMENT = "Jenkins_credit_task"
+        DIRECTORY_PATH = "C:/ProgramData/Jenkins"
+    }
+    
+    stages{
+        stage('Build'){
+            steps{
+                echo "Fetch the source code from $DIRECTORY_PATH, specified by the environment variable"
+                echo "Compile the code and generate any necessary artifacts"
+            }
+        }
+        stage('Unit and Integration Tests'){
+            steps{
+                echo "Unit tests..."
+                echo "Integration tests..."
+            }
+            post{
+                success{
+                    mail to: "kira.anne27@gmail.com",
+                    subject: "Test Status Email",
+                    body: "The Unit and Integration tests have passed!"
+                }
+            }
+        }
+        stage('Code Analysis'){
+            steps{
+                echo "Check the quality of the code, ensuring it's up to standards with codescan..."
+            }
+        }
+        stage('Security Scan'){
+            steps{
+                echo "Checking security of code using codescan..."
+            }
+            post{
+                success{
+                    mail to: "kira.anne27@gmail.com",
+                    subject: "Security Status Email",
+                    body: "Security scans have been approved and succeeded!"
+                }
+            }
+        }
+        stage('Deploy to Staging'){
+            steps{
+                echo "Deploying to staging server..."
+            }
+        }
+        stage('Integration Tests on Staging'){
+            steps{
+                echo "Ensuring changes run as intended..."
+            }
+            post{
+                success{
+                    mail to: "kira.anne27@gmail.com",
+                    subject: "Test Status Email",
+                    body: "The tests on the staging server have passed!"
+                }
+            }
+        }
+        stage('Deploy to Production'){
+            steps{
+                echo "Successfully deployed to $PRODUCTION_ENVIRONMENT"
+            }
+        }
+    }
+}
